@@ -5,6 +5,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Post extends Model {
 
     protected $fillable = [];
+    protected $table = "posts";
     public function tag(){
         return $this->belongsToMany(Tag::class);
     }

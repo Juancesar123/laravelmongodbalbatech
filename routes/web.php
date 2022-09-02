@@ -34,6 +34,12 @@ $router->post('/category', 'CategoryController@store' );
 $router->put('/category/{id}', 'CategoryController@update' );
 $router->delete('/category/{id}', 'CategoryController@destroy' );
 // ------------------- end category section ------------
+// blog section
+$router->get('/blog', 'BlogController@index' );
+$router->post('/blog', 'BlogController@store' );
+$router->put('/blog/{id}', 'BlogController@update' );
+$router->delete('/blog/{id}', 'BlogController@destroy' );
+// ------------------- end category section ------------
    
 });
 $router->get('/firebase', 'FirebaseController@index' );

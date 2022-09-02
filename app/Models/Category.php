@@ -5,6 +5,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Category extends Model {
 
     protected $fillable = [];
+    protected $table = "category";
     public function Post(){
         return $this->hasOne(Post::class,'post_id','category_id');
     }

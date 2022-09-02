@@ -5,8 +5,9 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Tag extends Model {
 
     protected $fillable = [];
-    public function item()
+    protected $table = "tags";
+    public function post()
     {
-        return $this->belongsToMany(Post::class,'item_pajak','post_id','tag_id');
+        return $this->belongsToMany(Post::class,'post_tag','post_id','tag_id');
     }
 }

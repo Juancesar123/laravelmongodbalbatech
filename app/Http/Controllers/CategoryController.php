@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
  *     path="/api/category",
  *     tags={"Category"},
  *     description="Get Category Data",
- *     @OA\Response(response="200", description="display all category data")
+ *     @OA\Response(response="200", description="display all category data"),
+ *     security={{ "bearerAuth": {} }}
  * )
  * @OA\Post(
  *     path="/api/category",

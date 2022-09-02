@@ -134,6 +134,169 @@
                 ]
             }
         },
+        "/api/blog": {
+            "get": {
+                "tags": [
+                    "Blog"
+                ],
+                "description": "Get Blog Data",
+                "operationId": "831e19393b879c3c8b68d85d69f2560d",
+                "responses": {
+                    "200": {
+                        "description": "display all Blog data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Blog"
+                ],
+                "description": "Create Data Blog",
+                "operationId": "b192180861fd9356345e99480d9f2919",
+                "requestBody": {
+                    "description": "Create Data Blog",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title,description,category,tag"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "IT"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Blog ini adalah ....."
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "cat_id"
+                                    },
+                                    "tag": {
+                                        "type": "array",
+                                        "format": "array",
+                                        "items": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "hiburan"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Field is null",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Attribute ... harus di isi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/blog/{id}": {
+            "put": {
+                "tags": [
+                    "Blog"
+                ],
+                "description": "Update Data Blog",
+                "operationId": "4f8e3849972a8ef095d8de75f79e5c07",
+                "requestBody": {
+                    "description": "Update Data Blog",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "IT"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Field is null",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Attribute ... harus di isi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Blog"
+                ],
+                "description": "Delete Blog by Id",
+                "operationId": "b2e6e17335aab90d6868adeb2dec6697",
+                "responses": {
+                    "200": {
+                        "description": "Delete Blog By Id"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/category": {
             "get": {
                 "tags": [
@@ -144,7 +307,12 @@
                     "200": {
                         "description": "display all category data"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
