@@ -159,9 +159,9 @@ class BlogController extends Controller
     }
     public function update($id, Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:4',
-            'brand' => 'required|min:6',
-            'cc' => 'required|numeric|min:6'
+            'title' => 'required|min:4',
+            'tag' => 'required|array',
+            'category' => 'required|min:4'
         ],
         [
             'required'  => ':attribute harus diisi',
@@ -180,10 +180,22 @@ class BlogController extends Controller
             die();
         }
         $vehicle = Vehicle::find($id);
-        $vehicle->name = $request->name;
-        $vehicle->brand = $request->brand;
-        $vehicle->cc = $request->cc;
+        $vehicle->title = $request->title;
+        $vehicle->description = $request->description;
+        $vehicle->category = $request->category;
         $vehicle->save();
+        foreach ($request->tag as $key => $value) {
+            $data = Tag::Where('name','like','%' . $value['name'] . '%')->first();
+            if($data){
+                $blog->tag()->sync($data->id);
+            }else{
+                //dd($value);
+                $tag = new Tag();
+                $tag->name = $value['name'];
+                $tag->save();
+                $blog->tag()->sync($tag->id);
+            }
+        }
         $resp = [
             'response' => [
                 'message' => 'Data sukses diubah',
@@ -193,7 +205,16 @@ class BlogController extends Controller
         return response()->json($resp);
     }
     public function destroy($id){
-        Vehicle::find($id)->delete();
+        Post::find($id)->delete();
+        // if($request->id){
+        //     Post::find($id)->delete();
+        // }else{
+        //     $post = new Post();
+        //     for ($i=0; $i < count($request->tag); $i++) {
+        //         //Tag::find($request->tag[$i]['_id'])->delete();
+        //         $post->tag()->detach($request->tag[$i]['_id']);
+        //     }
+        // }
         $resp = [
             'response' => [
                 'message' => 'Data sukses dihapus',
