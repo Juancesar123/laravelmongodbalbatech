@@ -168,6 +168,7 @@ class AuthController extends Controller
         // Pass true as the first param to force the token to be blacklisted "forever".
         // The second parameter will reset the claims for the new token
         $token = $this->jwt->getToken();
+        auth()->logout();
         if($this->jwt->invalidate($token)){
                 return response()->json([
                     'message' => 'User logged off successfully!'
